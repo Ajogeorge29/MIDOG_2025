@@ -82,6 +82,19 @@ Generate the full audit:
 midog-audit --workers 8
 ```
 
+Run the resource-bounded candidate-level pilot (32 GB RAM, CPU-safe defaults):
+
+```bash
+midog-pilot
+```
+
+This trains a lightweight verifier and normal/atypical classifier, selects
+thresholds on specimen-disjoint validation data, and evaluates the hierarchical
+background/normal/atypical path on held-out specimens. It opens Track 1 TIFFs
+sequentially and caps all sample counts in `configs/pilot.toml`. The pilot uses
+annotation coordinates as proposals, so it validates data flow and modeling
+sanity—not whole-slide proposal detection or final challenge performance.
+
 Open `reports/generated/data_audit_report.html`. Machine-readable companion
 files include:
 

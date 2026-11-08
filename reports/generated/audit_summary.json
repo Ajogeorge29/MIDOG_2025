@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T15:20:10.201370+00:00",
+  "generated_at": "2026-11-08T16:41:11.090803+00:00",
   "track1": {
     "metadata_images": 553,
     "annotations": 26286,
@@ -122,48 +122,46 @@
     "track1_unique_mitosis_coordinates": 11937
   },
   "track2": {
-    "csv_rows": 11939,
-    "unique_image_ids": 11936,
+    "csv_rows": 11937,
+    "unique_image_ids": 11937,
     "png_files": 11937,
     "source_wsis": 475,
     "tumor_domains": 7,
     "class_counts": {
-      "NMF": 10191,
+      "NMF": 10189,
       "AMF": 1748
     },
-    "nmf_to_amf_ratio": 5.830091533180778,
+    "nmf_to_amf_ratio": 5.828947368421052,
     "missing_files": [],
-    "orphan_files": [
-      "8927.png"
-    ],
-    "duplicate_id_rows": 4,
-    "duplicate_coordinate_rows": 4,
+    "orphan_files": [],
+    "duplicate_id_rows": 0,
+    "duplicate_coordinate_rows": 0,
     "exact_duplicate_file_rows": 0,
     "perceptual_hash_collision_rows": 44,
     "corrupt_files": 0,
     "invalid_labels": {},
-    "strict_majority_checkable_rows": 11939,
+    "strict_majority_checkable_rows": 11937,
     "inconsistent_majority_rows": 49,
     "expert_vote_coverage": {
       "2": 7127,
-      "3": 4812
+      "3": 4810
     },
     "unanimous_available_votes": 10298,
     "pairwise_agreement": {
       "expert1 vs expert2": {
-        "n": 11939,
-        "agreement": 0.8814808610436385,
-        "kappa": 0.5715597021536261
+        "n": 11937,
+        "agreement": 0.8816285498869063,
+        "kappa": 0.5719575625657171
       },
       "expert1 vs expert3": {
-        "n": 4812,
-        "agreement": 0.8362427265170407,
-        "kappa": 0.43896766129404535
+        "n": 4810,
+        "agreement": 0.8361746361746362,
+        "kappa": 0.4389209129370245
       },
       "expert2 vs expert3": {
-        "n": 4812,
-        "agreement": 0.7757689110556941,
-        "kappa": 0.4433965904939309
+        "n": 4810,
+        "agreement": 0.7760914760914761,
+        "kappa": 0.44401848474304645
       }
     },
     "dimensions": {
@@ -179,7 +177,7 @@
       "Tumor": {
         "canine lymphoma": 3959,
         "canine cutaneous mast cell tumor": 2327,
-        "human breast cancer": 1723,
+        "human breast cancer": 1721,
         "canine soft tissue sarcoma": 1286,
         "human melanoma": 1150,
         "canine lung cancer": 855,
@@ -189,18 +187,18 @@
         "3D Histech": 6100,
         "Aperio CS2": 3015,
         "Hamamatsu XR": 1789,
-        "Hamamatsu S360": 584,
+        "Hamamatsu S360": 582,
         "Hamammatsu XR": 451
       },
       "Origin": {
         "VMU Vienna": 5003,
-        "UMC Utrecht": 3512,
+        "UMC Utrecht": 3510,
         "FU Berlin": 2327,
         "AMC New York": 1097
       },
       "Species": {
         "Canine": 8427,
-        "Human": 3512
+        "Human": 3510
       }
     }
   }

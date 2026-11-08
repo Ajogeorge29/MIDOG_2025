@@ -22,8 +22,8 @@ from pathlib import Path
 from .paths import DATA_ROOT
 
 TRACK2_CSV_URL = (
-    "https://midog2025.deepmicroscopy.org/data/"
-    "MIDOG25_Atypical_Classification_Train_Set.csv"
+    "https://zenodo.org/records/16044804/files/"
+    "MIDOG25_Atypical_Classification_Train_Set.csv?download=1"
 )
 TRACK2_ARCHIVE_URL = (
     "https://midog2025.deepmicroscopy.org/data/"
@@ -35,7 +35,7 @@ TRACK1_MANIFEST_SCRIPT_URL = (
     "MIDOG_2025_Guide/main/download_MIDOGpp.py"
 )
 
-TRACK2_CSV_MD5 = "71812c0278ae2057524890cf6b166530"
+TRACK2_CSV_MD5 = "6f31b448ba88dc7595882c23a1d7e388"
 TRACK2_ARCHIVE_MD5 = "c68b09c51dda154aef798e8df094b8dc"
 
 

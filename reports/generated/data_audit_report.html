@@ -22,8 +22,8 @@ code { background:#f1f5f9; padding:2px 5px; border-radius:4px; } a { color:var(-
 <body><main>
 <div class="eyebrow">MIDOG 2025 · reproducible audit</div>
 <h1>Training data audit</h1>
-<p class="muted">Generated 2026-11-08T15:20:10.201370+00:00. Full-image statistics reflect files present locally at audit time.</p>
-<div class="cards"><div class="card"><span>Track 1 ROI images</span><strong>553</strong></div><div class="card"><span>Track 1 annotations</span><strong>26,286</strong></div><div class="card"><span>Track 2 CSV rows</span><strong>11,939</strong></div><div class="card"><span>Track 2 PNGs</span><strong>11,937</strong></div><div class="card"><span>Source WSIs</span><strong>475</strong></div><div class="card"><span>NMF : AMF</span><strong>5.83 : 1</strong></div></div>
+<p class="muted">Generated 2026-11-08T16:41:11.090803+00:00. Full-image statistics reflect files present locally at audit time.</p>
+<div class="cards"><div class="card"><span>Track 1 ROI images</span><strong>553</strong></div><div class="card"><span>Track 1 annotations</span><strong>26,286</strong></div><div class="card"><span>Track 2 CSV rows</span><strong>11,937</strong></div><div class="card"><span>Track 2 PNGs</span><strong>11,937</strong></div><div class="card"><span>Source WSIs</span><strong>475</strong></div><div class="card"><span>NMF : AMF</span><strong>5.83 : 1</strong></div></div>
 
 <div class="callout"><strong>Resolution answer:</strong> do not assume every test image is exactly 0.25&nbsp;µm/px.
 The official challenge documentation lists native scanner resolutions of 0.22, 0.23 and 0.25&nbsp;µm/px; the
@@ -55,7 +55,7 @@ See the <a href="https://zenodo.org/records/15077361">challenge specification</a
       <td>high</td>
       <td>Model validation</td>
       <td>Patches from the same source WSI are strongly correlated.</td>
-      <td>475 source WSIs for 11,939 rows</td>
+      <td>475 source WSIs for 11,937 rows</td>
       <td>Split by source filename (and preferably domain), never randomly by patch.</td>
     </tr>
     <tr>
@@ -67,24 +67,10 @@ See the <a href="https://zenodo.org/records/15077361">challenge specification</a
     </tr>
     <tr>
       <td>high</td>
-      <td>Track 2 files</td>
-      <td>CSV-to-file membership is not bijective.</td>
-      <td>0 referenced files missing; 1 orphan files</td>
-      <td>Reconcile IDs and do not silently drop unmatched rows/files.</td>
-    </tr>
-    <tr>
-      <td>high</td>
       <td>Track 2 labels</td>
       <td>Published majority disagrees with a strict majority of available expert votes.</td>
       <td>49 rows</td>
       <td>Review these rows and retain published labels only with documented adjudication.</td>
-    </tr>
-    <tr>
-      <td>high</td>
-      <td>Track 2 metadata</td>
-      <td>CSV image identifiers are not one-to-one with rows.</td>
-      <td>11,939 rows; 11,936 unique IDs; 4 rows involved</td>
-      <td>Resolve duplicate IDs before splitting or training; use the exported duplicate table.</td>
     </tr>
     <tr>
       <td>medium</td>
@@ -97,15 +83,8 @@ See the <a href="https://zenodo.org/records/15077361">challenge specification</a
       <td>medium</td>
       <td>Track 2 labels</td>
       <td>The binary target is substantially imbalanced.</td>
-      <td>NMF:AMF = 5.83:1 (10,191 vs 1,748)</td>
+      <td>NMF:AMF = 5.83:1 (10,189 vs 1,748)</td>
       <td>Report balanced accuracy/AUROC and use class-aware sampling or loss weighting.</td>
-    </tr>
-    <tr>
-      <td>medium</td>
-      <td>Track 2 metadata</td>
-      <td>Multiple rows share the same source WSI coordinate.</td>
-      <td>4 rows involved</td>
-      <td>Deduplicate by source filename and coordinate before evaluation splits.</td>
     </tr>
     <tr>
       <td>info</td>
@@ -118,8 +97,8 @@ See the <a href="https://zenodo.org/records/15077361">challenge specification</a
 </table>
 
 <h2>Track 2: atypical classification</h2>
-<p>The archive contains 11,937 PNG files while the CSV contains 11,939 rows and
-11,936 unique image IDs. The source grouping column identifies 475
+<p>The archive contains 11,937 PNG files while the CSV contains 11,937 rows and
+11,937 unique image IDs. The source grouping column identifies 475
 WSIs. Use that field as the minimum split unit.</p>
 <h3>Class distribution</h3><table class="dataframe data-table">
   <thead>
@@ -131,7 +110,7 @@ WSIs. Use that field as the minimum split unit.</p>
   <tbody>
     <tr>
       <td>NMF</td>
-      <td>10191</td>
+      <td>10189</td>
     </tr>
     <tr>
       <td>AMF</td>
@@ -157,7 +136,7 @@ WSIs. Use that field as the minimum split unit.</p>
     </tr>
     <tr>
       <td>human breast cancer</td>
-      <td>1723</td>
+      <td>1721</td>
     </tr>
     <tr>
       <td>canine soft tissue sarcoma</td>
@@ -189,21 +168,21 @@ WSIs. Use that field as the minimum split unit.</p>
   <tbody>
     <tr>
       <td>expert1 vs expert2</td>
-      <td>11939</td>
-      <td>0.881</td>
+      <td>11937</td>
+      <td>0.882</td>
       <td>0.572</td>
     </tr>
     <tr>
       <td>expert1 vs expert3</td>
-      <td>4812</td>
+      <td>4810</td>
       <td>0.836</td>
       <td>0.439</td>
     </tr>
     <tr>
       <td>expert2 vs expert3</td>
-      <td>4812</td>
+      <td>4810</td>
       <td>0.776</td>
-      <td>0.443</td>
+      <td>0.444</td>
     </tr>
   </tbody>
 </table>

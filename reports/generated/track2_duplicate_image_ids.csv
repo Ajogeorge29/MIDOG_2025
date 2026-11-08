@@ -1,5 +1,1 @@
 image_id,filename,coordinateX,coordinateY,Tumor,Scanner,Origin,Species,expert1,expert2,expert3,majority
-8925.png,085.tiff,4170,488,human breast cancer,Hamamatsu S360,UMC Utrecht,Human,NMF,AMF,NMF,NMF
-8925.png,085.tiff,3048,4569,human breast cancer,Hamamatsu S360,UMC Utrecht,Human,NMF,AMF,NMF,NMF
-8925.png,085.tiff,4170,488,human breast cancer,Hamamatsu S360,UMC Utrecht,Human,NMF,AMF,NMF,NMF
-8925.png,085.tiff,3048,4569,human breast cancer,Hamamatsu S360,UMC Utrecht,Human,NMF,AMF,NMF,NMF

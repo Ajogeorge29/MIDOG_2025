@@ -2,10 +2,7 @@ severity,scope,finding,metric,recommendation
 high,Track 1 annotations,Some detection boxes fail geometry or boundary validation.,out_of_bounds: 274,Clip boxes to ROI bounds (or exclude after review) before patch extraction and training.
 info,Track 1 manifest,The COCO metadata references more TIFF names than the official downloader publishes.,553 metadata names; 503 downloadable TIFFs; 50 metadata-only names,Treat the official 503-TIFF manifest as the downloadable training corpus and retain this distinction in provenance.
 critical,Cross-track leakage,Track 2 patches are derived from Track 1 mitosis coordinates.,"11,594/11,937 unique Track 2 coordinates match Track 1",Use one shared WSI-level split manifest across both tracks; never split tracks independently.
-high,Track 2 metadata,CSV image identifiers are not one-to-one with rows.,"11,939 rows; 11,936 unique IDs; 4 rows involved",Resolve duplicate IDs before splitting or training; use the exported duplicate table.
-high,Track 2 files,CSV-to-file membership is not bijective.,0 referenced files missing; 1 orphan files,Reconcile IDs and do not silently drop unmatched rows/files.
 high,Track 2 labels,Published majority disagrees with a strict majority of available expert votes.,49 rows,Review these rows and retain published labels only with documented adjudication.
-medium,Track 2 metadata,Multiple rows share the same source WSI coordinate.,4 rows involved,Deduplicate by source filename and coordinate before evaluation splits.
 medium,Track 2 domains,A scanner name typo creates a false extra domain.,Hamammatsu XR: 451 rows,Normalize `Hamammatsu XR` to `Hamamatsu XR` in a derived metadata column.
-high,Model validation,Patches from the same source WSI are strongly correlated.,"475 source WSIs for 11,939 rows","Split by source filename (and preferably domain), never randomly by patch."
-medium,Track 2 labels,The binary target is substantially imbalanced.,"NMF:AMF = 5.83:1 (10,191 vs 1,748)",Report balanced accuracy/AUROC and use class-aware sampling or loss weighting.
+high,Model validation,Patches from the same source WSI are strongly correlated.,"475 source WSIs for 11,937 rows","Split by source filename (and preferably domain), never randomly by patch."
+medium,Track 2 labels,The binary target is substantially imbalanced.,"NMF:AMF = 5.83:1 (10,189 vs 1,748)",Report balanced accuracy/AUROC and use class-aware sampling or loss weighting.

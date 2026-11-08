@@ -1,0 +1,23 @@
+[pilot]
+seed = 2025
+feature_size = 48
+
+# Hard ceilings keep the run safe on a 32 GB laptop.
+subtype_train_rows = 6000
+subtype_validation_rows = 1600
+verifier_train_per_class = 1500
+verifier_validation_per_class = 400
+joint_test_candidates = 1200
+
+# WSI files are opened sequentially, never in parallel.
+negative_train_wsi_files = 20
+negative_validation_wsi_files = 6
+joint_test_wsi_files = 6
+
+[model]
+loss = "log_loss"
+alpha = 0.0001
+max_iter = 1000
+early_stopping = true
+n_jobs = 1
+
