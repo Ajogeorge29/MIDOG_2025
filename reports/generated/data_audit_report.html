@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIDOG 2025 data audit</title>
+<style>
+:root { --ink:#19212b; --muted:#64748b; --panel:#f7f7fb; --purple:#6d3fc0; --teal:#159b8b; --line:#e2e8f0; }
+* { box-sizing:border-box; } body { margin:0; color:var(--ink); font:15px/1.55 Inter,Segoe UI,Arial,sans-serif; background:#fff; }
+main { max-width:1180px; margin:auto; padding:48px 28px 80px; } h1 { font-size:42px; letter-spacing:-1.4px; margin:.1em 0; }
+h2 { margin-top:48px; border-bottom:1px solid var(--line); padding-bottom:8px; } h3 { margin-top:28px; }
+.eyebrow { color:var(--purple); font-weight:700; text-transform:uppercase; letter-spacing:.12em; } .muted { color:var(--muted); }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:28px 0; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; } .card span { display:block; color:var(--muted); } .card strong { font-size:25px; }
+.callout { border-left:5px solid var(--purple); background:#f7f2ff; padding:18px 20px; border-radius:8px; }
+.data-table { width:100%; border-collapse:collapse; margin:16px 0 30px; } .data-table th,.data-table td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; } .data-table th { background:var(--panel); }
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:20px; } figure { margin:0; border:1px solid var(--line); border-radius:12px; overflow:hidden; } figure img { width:100%; display:block; } figcaption { padding:10px 14px; color:var(--muted); }
+code { background:#f1f5f9; padding:2px 5px; border-radius:4px; } a { color:var(--purple); }
+@media(max-width:600px) { h1 { font-size:32px; } main { padding:28px 16px; } .gallery { grid-template-columns:1fr; } }
+</style>
+</head>
+<body><main>
+<div class="eyebrow">MIDOG 2025 · reproducible audit</div>
+<h1>Training data audit</h1>
+<p class="muted">Generated 2026-11-08T15:20:10.201370+00:00. Full-image statistics reflect files present locally at audit time.</p>
+<div class="cards"><div class="card"><span>Track 1 ROI images</span><strong>553</strong></div><div class="card"><span>Track 1 annotations</span><strong>26,286</strong></div><div class="card"><span>Track 2 CSV rows</span><strong>11,939</strong></div><div class="card"><span>Track 2 PNGs</span><strong>11,937</strong></div><div class="card"><span>Source WSIs</span><strong>475</strong></div><div class="card"><span>NMF : AMF</span><strong>5.83 : 1</strong></div></div>
+
+<div class="callout"><strong>Resolution answer:</strong> do not assume every test image is exactly 0.25&nbsp;µm/px.
+The official challenge documentation lists native scanner resolutions of 0.22, 0.23 and 0.25&nbsp;µm/px; the
+challenge paper additionally reports 0.12&nbsp;µm/px for two final-test domains. They are broadly similar in scale,
+but not identical. Read TIFF spacing/DPI metadata per image and resample explicitly when a model requires a fixed MPP.
+See the <a href="https://zenodo.org/records/15077361">challenge specification</a> and
+<a href="https://arxiv.org/abs/2606.07368">challenge paper</a>.</div>
+
+<h2>Priority findings</h2>
+<table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>severity</th>
+      <th>scope</th>
+      <th>finding</th>
+      <th>metric</th>
+      <th>recommendation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>critical</td>
+      <td>Cross-track leakage</td>
+      <td>Track 2 patches are derived from Track 1 mitosis coordinates.</td>
+      <td>11,594/11,937 unique Track 2 coordinates match Track 1</td>
+      <td>Use one shared WSI-level split manifest across both tracks; never split tracks independently.</td>
+    </tr>
+    <tr>
+      <td>high</td>
+      <td>Model validation</td>
+      <td>Patches from the same source WSI are strongly correlated.</td>
+      <td>475 source WSIs for 11,939 rows</td>
+      <td>Split by source filename (and preferably domain), never randomly by patch.</td>
+    </tr>
+    <tr>
+      <td>high</td>
+      <td>Track 1 annotations</td>
+      <td>Some detection boxes fail geometry or boundary validation.</td>
+      <td>out_of_bounds: 274</td>
+      <td>Clip boxes to ROI bounds (or exclude after review) before patch extraction and training.</td>
+    </tr>
+    <tr>
+      <td>high</td>
+      <td>Track 2 files</td>
+      <td>CSV-to-file membership is not bijective.</td>
+      <td>0 referenced files missing; 1 orphan files</td>
+      <td>Reconcile IDs and do not silently drop unmatched rows/files.</td>
+    </tr>
+    <tr>
+      <td>high</td>
+      <td>Track 2 labels</td>
+      <td>Published majority disagrees with a strict majority of available expert votes.</td>
+      <td>49 rows</td>
+      <td>Review these rows and retain published labels only with documented adjudication.</td>
+    </tr>
+    <tr>
+      <td>high</td>
+      <td>Track 2 metadata</td>
+      <td>CSV image identifiers are not one-to-one with rows.</td>
+      <td>11,939 rows; 11,936 unique IDs; 4 rows involved</td>
+      <td>Resolve duplicate IDs before splitting or training; use the exported duplicate table.</td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>Track 2 domains</td>
+      <td>A scanner name typo creates a false extra domain.</td>
+      <td>Hamammatsu XR: 451 rows</td>
+      <td>Normalize `Hamammatsu XR` to `Hamamatsu XR` in a derived metadata column.</td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>Track 2 labels</td>
+      <td>The binary target is substantially imbalanced.</td>
+      <td>NMF:AMF = 5.83:1 (10,191 vs 1,748)</td>
+      <td>Report balanced accuracy/AUROC and use class-aware sampling or loss weighting.</td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>Track 2 metadata</td>
+      <td>Multiple rows share the same source WSI coordinate.</td>
+      <td>4 rows involved</td>
+      <td>Deduplicate by source filename and coordinate before evaluation splits.</td>
+    </tr>
+    <tr>
+      <td>info</td>
+      <td>Track 1 manifest</td>
+      <td>The COCO metadata references more TIFF names than the official downloader publishes.</td>
+      <td>553 metadata names; 503 downloadable TIFFs; 50 metadata-only names</td>
+      <td>Treat the official 503-TIFF manifest as the downloadable training corpus and retain this distinction in provenance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Track 2: atypical classification</h2>
+<p>The archive contains 11,937 PNG files while the CSV contains 11,939 rows and
+11,936 unique image IDs. The source grouping column identifies 475
+WSIs. Use that field as the minimum split unit.</p>
+<h3>Class distribution</h3><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>label</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NMF</td>
+      <td>10191</td>
+    </tr>
+    <tr>
+      <td>AMF</td>
+      <td>1748</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Domain distribution</h3><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>tumor</th>
+      <th>patches</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>canine lymphoma</td>
+      <td>3959</td>
+    </tr>
+    <tr>
+      <td>canine cutaneous mast cell tumor</td>
+      <td>2327</td>
+    </tr>
+    <tr>
+      <td>human breast cancer</td>
+      <td>1723</td>
+    </tr>
+    <tr>
+      <td>canine soft tissue sarcoma</td>
+      <td>1286</td>
+    </tr>
+    <tr>
+      <td>human melanoma</td>
+      <td>1150</td>
+    </tr>
+    <tr>
+      <td>canine lung cancer</td>
+      <td>855</td>
+    </tr>
+    <tr>
+      <td>human neuroendocrine tumor</td>
+      <td>639</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Expert agreement</h3><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>pair</th>
+      <th>shared rows</th>
+      <th>agreement</th>
+      <th>Cohen kappa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>expert1 vs expert2</td>
+      <td>11939</td>
+      <td>0.881</td>
+      <td>0.572</td>
+    </tr>
+    <tr>
+      <td>expert1 vs expert3</td>
+      <td>4812</td>
+      <td>0.836</td>
+      <td>0.439</td>
+    </tr>
+    <tr>
+      <td>expert2 vs expert3</td>
+      <td>4812</td>
+      <td>0.776</td>
+      <td>0.443</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Track 1: mitosis detection</h2>
+<p>The COCO-style metadata contains 553 ROI images and 26,286
+annotations across 7 tumor domains. Its <code>bbox</code> values are corner coordinates
+<code>[x0,y0,x1,y1]</code>, not standard COCO <code>[x,y,width,height]</code>; treating them as standard COCO silently
+corrupts box sizes and centers.</p>
+<p>Local TIFF status at audit time: 503/503
+non-empty files, 0 zero-byte files.</p>
+
+<h2>Cross-track relationship</h2>
+<p>11,594 of 11,937 unique Track 2
+source coordinates match Track 1 mitotic annotations. This is expected dataset derivation, but it creates severe
+leakage if the tracks are split independently. Maintain one WSI-level split manifest for both tasks.</p>
+
+<h2>Visual audit</h2><div class="gallery"><figure><img src="track2_class_distribution.png" alt="Track 2 class distribution"><figcaption>Track 2 class distribution</figcaption></figure><figure><img src="track2_class_by_tumor.png" alt="Class balance by tumor domain"><figcaption>Class balance by tumor domain</figcaption></figure><figure><img src="track2_tumor_distribution.png" alt="Patches by tumor domain"><figcaption>Patches by tumor domain</figcaption></figure><figure><img src="track2_scanner_distribution.png" alt="Patches by scanner"><figcaption>Patches by scanner</figcaption></figure><figure><img src="track1_images_by_tumor.png" alt="Track 1 image domains"><figcaption>Track 1 image domains</figcaption></figure><figure><img src="track1_annotations_by_tumor.png" alt="Track 1 annotation domains"><figcaption>Track 1 annotation domains</figcaption></figure></div>
+
+<h2>Artifacts and methodology</h2>
+<p>The report folder also contains machine-readable <code>audit_summary.json</code>, issue records,
+per-image inventories, and duplicate-ID rows. Patch checks include full-file SHA-256, decode integrity, dimensions,
+mode, downsampled RGB/tissue statistics, and average-hash collisions. Track 1 metadata checks include referential
+integrity, category validity, box geometry/bounds, annotation vote coverage, domain counts, and cross-track coordinate matching.</p>
+<p class="muted">Average-hash collisions are candidates, not proof of duplication. TIFF pixel statistics are deferred
+until the 65 GB image download completes; rerunning the command refreshes this report from the current local state.</p>
+</main></body></html>

@@ -1,0 +1,21 @@
+[track1]
+name = "MIDOG++"
+task = "mitotic figure detection"
+metadata_filename = "MIDOGpp.json"
+metadata_url = "https://figshare.com/ndownloader/files/40283737"
+expected_download_size_gb = 65
+
+[track2]
+name = "MIDOG 2025 Atypical Training Set"
+task = "atypical vs normal mitosis classification"
+csv_filename = "MIDOG25_Atypical_Classification_Train_Set.csv"
+csv_url = "https://midog2025.deepmicroscopy.org/data/MIDOG25_Atypical_Classification_Train_Set.csv"
+archive_filename = "MIDOG25_Atypical_Classification_Train_Set.zip"
+archive_url = "https://midog2025.deepmicroscopy.org/data/MIDOG25_Atypical_Classification_Train_Set.zip"
+image_directory = "MIDOG25_Binary_Classification_Train_Set"
+
+[challenge]
+website = "https://midog2025.deepmicroscopy.org/"
+dataset_page = "https://midog2025.deepmicroscopy.org/datasets/"
+track1_reference = "https://github.com/DeepMicroscopy/MIDOG25_T1_reference_docker"
+track2_reference = "https://github.com/DeepMicroscopy/MIDOG25_T2_reference_docker"

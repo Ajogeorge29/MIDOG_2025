@@ -1,0 +1,207 @@
+{
+  "generated_at": "2026-11-08T15:20:10.201370+00:00",
+  "track1": {
+    "metadata_images": 553,
+    "annotations": 26286,
+    "categories": {
+      "1": "mitotic figure",
+      "2": "not mitotic figure"
+    },
+    "category_counts": {
+      "not mitotic figure": 14349,
+      "mitotic figure": 11937
+    },
+    "tumor_domains": 7,
+    "tumor_image_counts": {
+      "human breast cancer": 200,
+      "canine soft tissue sarcoma": 100,
+      "canine lymphosarcoma": 55,
+      "human neuroendocrine tumor": 55,
+      "canine cutaneous mast cell tumor": 50,
+      "human melanoma": 49,
+      "canine lung cancer": 44
+    },
+    "missing_image_references": 0,
+    "unknown_category_references": 0,
+    "duplicate_image_id_rows": 0,
+    "duplicate_annotation_id_rows": 0,
+    "bbox_issues": {
+      "out_of_bounds": 274
+    },
+    "annotation_vote_coverage": {
+      "2": 17727,
+      "3": 8559
+    },
+    "unanimous_annotation_votes": 20771,
+    "metadata_referenced_tiff_files": 553,
+    "download_manifest_tiff_files": 503,
+    "metadata_only_tiff_files": [
+      "151.tiff",
+      "152.tiff",
+      "153.tiff",
+      "154.tiff",
+      "155.tiff",
+      "156.tiff",
+      "157.tiff",
+      "158.tiff",
+      "159.tiff",
+      "160.tiff",
+      "161.tiff",
+      "162.tiff",
+      "163.tiff",
+      "164.tiff",
+      "165.tiff",
+      "166.tiff",
+      "167.tiff",
+      "168.tiff",
+      "169.tiff",
+      "170.tiff",
+      "171.tiff",
+      "172.tiff",
+      "173.tiff",
+      "174.tiff",
+      "175.tiff",
+      "176.tiff",
+      "177.tiff",
+      "178.tiff",
+      "179.tiff",
+      "180.tiff",
+      "181.tiff",
+      "182.tiff",
+      "183.tiff",
+      "184.tiff",
+      "185.tiff",
+      "186.tiff",
+      "187.tiff",
+      "188.tiff",
+      "189.tiff",
+      "190.tiff",
+      "191.tiff",
+      "192.tiff",
+      "193.tiff",
+      "194.tiff",
+      "195.tiff",
+      "196.tiff",
+      "197.tiff",
+      "198.tiff",
+      "199.tiff",
+      "200.tiff"
+    ],
+    "local_nonempty_tiff_files": 503,
+    "zero_byte_tiff_files": 0,
+    "missing_local_tiff_files": 0,
+    "unexpected_local_tiff_files": [],
+    "corrupt_tiff_headers": 0,
+    "local_mpp_values": [
+      0.226293,
+      0.226295,
+      0.226317,
+      0.226321,
+      0.226347,
+      0.226565,
+      0.22664,
+      0.226833,
+      0.226834,
+      0.226859,
+      0.226861,
+      0.226889,
+      0.226891,
+      0.226905,
+      0.226907,
+      0.227102,
+      0.227246,
+      0.227438,
+      0.227443,
+      0.227444,
+      0.229848,
+      0.248166,
+      0.253301
+    ],
+    "cross_track_unique_coordinate_overlap": 11594,
+    "track2_unique_coordinates": 11937,
+    "track1_unique_mitosis_coordinates": 11937
+  },
+  "track2": {
+    "csv_rows": 11939,
+    "unique_image_ids": 11936,
+    "png_files": 11937,
+    "source_wsis": 475,
+    "tumor_domains": 7,
+    "class_counts": {
+      "NMF": 10191,
+      "AMF": 1748
+    },
+    "nmf_to_amf_ratio": 5.830091533180778,
+    "missing_files": [],
+    "orphan_files": [
+      "8927.png"
+    ],
+    "duplicate_id_rows": 4,
+    "duplicate_coordinate_rows": 4,
+    "exact_duplicate_file_rows": 0,
+    "perceptual_hash_collision_rows": 44,
+    "corrupt_files": 0,
+    "invalid_labels": {},
+    "strict_majority_checkable_rows": 11939,
+    "inconsistent_majority_rows": 49,
+    "expert_vote_coverage": {
+      "2": 7127,
+      "3": 4812
+    },
+    "unanimous_available_votes": 10298,
+    "pairwise_agreement": {
+      "expert1 vs expert2": {
+        "n": 11939,
+        "agreement": 0.8814808610436385,
+        "kappa": 0.5715597021536261
+      },
+      "expert1 vs expert3": {
+        "n": 4812,
+        "agreement": 0.8362427265170407,
+        "kappa": 0.43896766129404535
+      },
+      "expert2 vs expert3": {
+        "n": 4812,
+        "agreement": 0.7757689110556941,
+        "kappa": 0.4433965904939309
+      }
+    },
+    "dimensions": {
+      "128x128": 11937
+    },
+    "mean_rgb": {
+      "r": 173.46212044283104,
+      "g": 104.17284991048714,
+      "b": 176.81932487018025
+    },
+    "mean_tissue_fraction": 0.9658600538387878,
+    "domains": {
+      "Tumor": {
+        "canine lymphoma": 3959,
+        "canine cutaneous mast cell tumor": 2327,
+        "human breast cancer": 1723,
+        "canine soft tissue sarcoma": 1286,
+        "human melanoma": 1150,
+        "canine lung cancer": 855,
+        "human neuroendocrine tumor": 639
+      },
+      "Scanner": {
+        "3D Histech": 6100,
+        "Aperio CS2": 3015,
+        "Hamamatsu XR": 1789,
+        "Hamamatsu S360": 584,
+        "Hamammatsu XR": 451
+      },
+      "Origin": {
+        "VMU Vienna": 5003,
+        "UMC Utrecht": 3512,
+        "FU Berlin": 2327,
+        "AMC New York": 1097
+      },
+      "Species": {
+        "Canine": 8427,
+        "Human": 3512
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local configuration
+.env
+
+# Data, model weights, and generated artifacts
+data/raw/**
+data/interim/**
+data/processed/**
+models/**
+reports/generated/*
+.cache/
+
+# Keep directory documentation/placeholders
+!data/README.md
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!reports/generated/.gitkeep
+!reports/generated/*.html
+!reports/generated/*.png
+!reports/generated/audit_summary.json
+!reports/generated/data_quality_issues.csv
+!reports/generated/track2_duplicate_image_ids.csv
+!reports/generated/track2_recommended_split.csv
